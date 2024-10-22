@@ -1,5 +1,10 @@
 package ambar.springbootusers.Modelos;
 
+import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
+
+@Data
+@Document
 public class infoEmpleado {
     private String idEmpleado;
     private String idUser;

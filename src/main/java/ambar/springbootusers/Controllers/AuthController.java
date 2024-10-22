@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
@@ -40,12 +42,21 @@ public class AuthController {
     public ResponseEntity<String> login(@RequestBody userGeneral loginRequest) {
         userGeneral user = userGeneralRepository.getUserGeneralByCorreo(loginRequest.getCorreo());
 
-        if (user != null && user.getPassword().equals(this.convertirSHA256(loginRequest.getPassword()))) { // Comparar hash si es necesario
-            String token = jwtUtil.generateToken(user.get_id(), user.getCorreo(), user.getRol().get_id());
-            System.out.println(token);
+        if (user != null && user.getPassword().equals(this.convertirSHA256(loginRequest.getPassword()))) {
+            // Crear el mapa de claims con los datos del usuario
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("id", user.get_id());
+            claims.put("correo", user.getCorreo());
+            claims.put("rolId", user.getRol().get_id());
+
+            // Generar el token JWT con los datos del usuario
+            String token = jwtUtil.generateToken(claims, user.getCorreo());
+            // Retornar el token JWT generado
             return ResponseEntity.ok(token);
         } else {
             return ResponseEntity.status(401).body("Credenciales incorrectas");
         }
     }
+
+
 }
