@@ -67,7 +67,7 @@ public class rolController {
         rol rolAEliminar = this.myRolRepository.findById(id).orElse(null);
         if(rolAEliminar != null){
             this.myRolRepository.delete(rolAEliminar);
-            throw new ResponseStatusException(HttpStatus.ACCEPTED,"se ha eliminado el rol con id " + id);
+            throw new ResponseStatusException(HttpStatus.OK,"se ha eliminado el rol con id " + id);
         }
         throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"el rol de id " + id +" no existe");
     }

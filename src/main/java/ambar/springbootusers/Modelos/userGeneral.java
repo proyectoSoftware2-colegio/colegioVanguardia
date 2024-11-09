@@ -1,4 +1,5 @@
 package ambar.springbootusers.Modelos;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +19,13 @@ import java.security.NoSuchAlgorithmException;
 public class userGeneral {
     @Id
     private String _id;
+    @NotNull
     private String nombreApellido;
+    @NotNull
     private String correo;
+    @NotNull
     private String numeroCelular;
+    @NotNull
     private String password;
     @DBRef
     private rol rol;

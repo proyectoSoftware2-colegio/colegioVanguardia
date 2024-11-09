@@ -18,8 +18,6 @@ public class rol {
     }
 
     public String toString(){
-        System.out.println(this.name);
-        System.out.println(this.description);
         return null;
     }
 

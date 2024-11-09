@@ -10,10 +10,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http, CustomSecurityFilter customSecurityFilter) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .csrf(csrf -> csrf.disable())
-                .addFilterBefore(customSecurityFilter, UsernamePasswordAuthenticationFilter.class) // Registrar el filtro antes de la autenticación
+//                .addFilterBefore(customSecurityFilter, UsernamePasswordAuthenticationFilter.class) // Registrar el filtro antes de la autenticación
                 .authorizeHttpRequests(authRequest -> authRequest.requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
                 .build();

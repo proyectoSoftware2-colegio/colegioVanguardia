@@ -48,9 +48,7 @@ public class permisosRolController {
         PermisosRol validacion = this.myPermisosRolRepo.getPermisosRolByPermisoAndRol(idPermiso,idRol);
         if(validacion == null){
             rol rolAsignar = this.myRolRepository.findById(idRol).orElse(null);
-            System.out.println(rolAsignar);
             permiso permisoAsignar = this.myPermisosRepo.findById(idPermiso).orElse(null);
-            System.out.println(permisoAsignar);
             if(rolAsignar != null && permisoAsignar != null){
                 PermisosRol nuevoPermisoRol = new PermisosRol();
                 nuevoPermisoRol.setRol(rolAsignar);

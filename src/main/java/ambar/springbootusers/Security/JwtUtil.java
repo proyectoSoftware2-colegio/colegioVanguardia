@@ -3,6 +3,7 @@ package ambar.springbootusers.Security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -15,6 +16,14 @@ public class JwtUtil {
 
     @Value("${jwt.secret}")
     private String secretKey;
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
+    }
 
     // Método para extraer los Claims del token
     public Claims extractClaims(String token) {
@@ -34,6 +43,11 @@ public class JwtUtil {
                 .signWith(SignatureAlgorithm.HS256, secretKey.getBytes())
                 .compact();
     }
+    public JwtUtil(String secretKey) {
+        this.secretKey = secretKey;
+    }
+    public JwtUtil(){}
+
 
     // Método para validar el token
     public Boolean validateToken(String token, String username) {
@@ -45,5 +59,7 @@ public class JwtUtil {
     private Boolean isTokenExpired(String token) {
         return extractClaims(token).getExpiration().before(new Date());
     }
+
+
 
 }

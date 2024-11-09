@@ -10,11 +10,9 @@ import java.util.Date;
 
 @Getter
 @Setter
-@Data
-@Document
 public class Evento {
     @Id
-    private String Id;
+    private String id;
     private String nombre;
     private String descripcion;
     private Date fecha;
